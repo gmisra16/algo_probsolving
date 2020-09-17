@@ -1,0 +1,24 @@
+/.metadata/
+/.recommenders/Servers/
+/.recommenders/
+/Servers/
+/.mvn/
+/.settings/
+/target/
+/.classpath/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+.project
+
+### idea ###
+.idea
+*.iml
+/out/
+

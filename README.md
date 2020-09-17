@@ -1,1 +1,4 @@
-# algo_probsolving
+# probsolving
+-readable solutions
+-alternate approach
+-continuous improvement
