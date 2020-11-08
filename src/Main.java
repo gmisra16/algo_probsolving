@@ -1,17 +1,12 @@
-import algo.SumAndGcd;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.concurrent.CountDownLatch;
 
 
 public class Main {
@@ -75,16 +70,94 @@ public class Main {
     int y= (int)(1000000000);
     System.out.println(findPrime(1,13));*/
     //System.out.println(compress("BCBCA"));
-    HashSet<Long> set = new HashSet<>(1000);
+    /*HashSet<Long> set = new HashSet<>(1000);
     for (int i = 1; i < 1000_000_000; i++) {
       long sum =(i*(i+1l))/2l;
       long x= (long)(Math.sqrt(1l+4*sum)-1l)/2l;
       if(x*(x+1) ==sum)System.out.println(i);
 
+    }*/
+    //System.out.println(triplet(Arrays.asList(1,2,2,2,4),8));
+    /*ListNode l = new ListNode(1);
+    l.next= new ListNode(2);
+    l.next.next=new ListNode(3);
+    TreeNode t = sortedListToBST(l);
+    System.out.println(t);*/
+    for (int i = 0; i < 10; i++) {
+      System.out.println(minSteps(i));
     }
 
-    //System.out.println(triplet(Arrays.asList(1,2,2,2,4),8));
   }
+  /****************/
+  public static int minSteps(int n) {
+    return calc(n,1,0);
+
+  }
+
+  public static int calc(int n, int buf, int res) {
+    if(n==0)return res;
+    if(n < 0)return Integer.MAX_VALUE;
+    return Math.min(calc(n-buf,buf,res+1),calc(n-2*buf,2*buf,res+2));
+  }
+  /****************/
+
+  private static ListNode head;
+
+  public static TreeNode sortedListToBST(ListNode list) {
+    if(list == null){
+      return null;
+    }
+    int size = countNode(list);
+    //ListNode runner = list;
+    head = list;
+    return inorderHelper(0, size - 1);
+  }
+
+  public static int countNode(ListNode list) {
+    int size=0;
+    while(list != null){
+      list = list.next;
+      size ++;
+    }
+    return size;
+  }
+
+  public static TreeNode inorderHelper(int start, int end){
+    if(start > end){
+      return null;
+    }
+    int mid = start + (end - start) / 2;
+    TreeNode left = inorderHelper(start, mid - 1);
+    TreeNode root = new TreeNode(head.val);
+    root.left = left;
+    head = head.next;
+    TreeNode right = inorderHelper(mid + 1, end);
+    root.right = right;
+    return root;
+  }
+
+    //Definition for singly-linked list.
+    public static class ListNode {
+        int val;
+        ListNode next;
+        ListNode() {}
+        ListNode(int val) { this.val = val; }
+        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+    }
+
+  public static class TreeNode {
+      int val;
+      TreeNode left;
+      TreeNode right;
+      TreeNode() {}
+      TreeNode(int val) { this.val = val; }
+      TreeNode(int val, TreeNode left, TreeNode right) {
+          this.val = val;
+          this.left = left;
+          this.right = right;
+      }
+  }
+
   static void run_case( int[] A) {
     int N = A.length;
     int[] freq = new int[N*N];
